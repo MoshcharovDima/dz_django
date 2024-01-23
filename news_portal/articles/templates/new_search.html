@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+
+{% block content %}
+  <h1>Search News</h1>
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+    {% for news in filter.qs %}
+      <li>
+        <a href="{% url 'news_detail' news.id %}">{{ news.title }}</a> by {{ news.author.user.username }} on {{ news.creation_time|date:"Y-m-d" }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
